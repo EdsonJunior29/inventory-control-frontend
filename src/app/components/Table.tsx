@@ -2,24 +2,20 @@
 
 import React from 'react';
 
-interface TableProps<T> {
+type TableProps =  {
     tableName: string
-    data: T[],
+    data: [ { id: number, name: string } ],
     onDetailClick: (id: number) => void;
 }
 
-export default function Table<T extends {id: number; name: string}, > ({
-    tableName,
-    data,
-    onDetailClick,
-}: TableProps<T>) {
+export default function Table({ tableName, data, onDetailClick }: TableProps) {
     return (
      <>
         <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
             <thead className="bg-blue-500 text-white">
                 <tr>
                     <th className="px-4 py-2">{tableName}</th>
-                    <th className="px-4 py-2">Detalhes</th>
+                    <th className="px-4 py-2">Informações</th>
                 </tr>
             </thead>
             <tbody>
