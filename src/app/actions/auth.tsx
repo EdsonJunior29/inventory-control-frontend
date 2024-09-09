@@ -1,4 +1,5 @@
 import { SignupFormSchema, FormState } from "../lib/definitions";
+import { createSession, deleteSession } from "../lib/session";
 
 export async function signup(state: FormState, formData: FormData){
     // Validate form fields
@@ -36,10 +37,19 @@ export async function signup(state: FormState, formData: FormData){
             }
         }
 
+        //Criando a session(cookie)
+        await createSession('15', 'dnednefbyrbfybebfyer');
+        // redirect('/Home')
+
        
         console.log('Response data:', data);
         return;
     } catch (error) {
         //enviar para a tela de erro ou voltar para o login
     }
+}
+
+export async function logout() {
+        deleteSession()
+        //redirect('/login')
 }

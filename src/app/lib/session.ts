@@ -25,11 +25,11 @@ export async function descrypt(session: string | undefined = '') {
     }
 }
 
-export async function createSession(userId: string, tokenJWT: string) {
+export async function createSession(userId: string, token: string) {
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
     const sessionPayload: SessionPayload = {
         userId,
-        tokenJWT,
+        token,
         expiresAt
     }
     const session = await encrypt(sessionPayload)
