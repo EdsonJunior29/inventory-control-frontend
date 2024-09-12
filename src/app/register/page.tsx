@@ -1,3 +1,4 @@
+import Button from '@/components/button'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 
@@ -14,6 +15,7 @@ export default async function RegisterPage () {
     <>
       <h2>Olá, { session?.user?.name }</h2>
       <div>Register page</div>
+      <Button></Button>
     </>
     
   )

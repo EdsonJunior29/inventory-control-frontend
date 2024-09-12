@@ -6,8 +6,6 @@ export default function LoginForm() {
     async function login(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
-        console.log(formData.get('email'))
-        console.log(formData.get('password'))
 
         const inputData = {
             email: formData.get('email'),
