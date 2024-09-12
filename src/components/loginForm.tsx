@@ -1,7 +1,8 @@
 'use client'
 
-export default function LoginForm() {
+import { signIn } from "next-auth/react"
 
+export default function LoginForm() {
     async function login(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
@@ -13,7 +14,10 @@ export default function LoginForm() {
             password: formData.get('password')
         }
 
-        console.log(inputData)
+        signIn("credentials", {
+            ...inputData,
+            callbackUrl: "/register"
+        })
     }
 
     return (
