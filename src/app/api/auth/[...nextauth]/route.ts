@@ -18,7 +18,7 @@ const authOptions: NextAuthOptions = {
                 return null
             }
 
-            if(credentials.email === 'edsonjos61@gmail.com' && credentials.password === '1234') {
+            if(credentials.email === 'edsonjos61@gmail.com' && credentials.password === 'Teste@7289') {
                 return {
                     id: '1',
                     name: 'Edson Junior',
