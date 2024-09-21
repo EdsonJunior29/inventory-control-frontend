@@ -14,7 +14,8 @@ const config: Config = {
   testEnvironment: 'jsdom',
   roots: ['<rootDir>/src'],
   resetMocks: true,
-  collectCoverageFrom: ['<rootDir>/src/**/*.{ts, tsx}'],
+  collectCoverage: true,
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}'],
   coveragePathIgnorePatterns: ['<rootDir>/node_modules/'],
   coverageDirectory: '<rootDir>/coverage',
   transform: {
