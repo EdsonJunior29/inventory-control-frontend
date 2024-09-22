@@ -14,25 +14,26 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useSearchParams } from 'next/navigation';
 
 const formSchema = z.object({
-  email: z.string().email({ message: 'Please enter a valid email' }).trim(),
+  email: z
+    .string()
+    .email({ message: 'Por favor, insira um e-mail válido' })
+    .trim(),
   password: z
     .string()
-    .min(8, { message: 'Be at least 8 characters long' })
-    .regex(/[A-Z]/, { message: 'Contain at least one uppercase letter.' })
-    .regex(/[a-z]/, { message: 'Contain at least one lowercase letter.' })
-    .regex(/[0-9]/, { message: 'Contain at least one number.' })
-    .regex(/[a-zA-Z0-9_]/, {
-      message: 'Contain at least one special character.',
-    })
+    .min(8, { message: 'Sua senha deve ter pelo menos 8 caracteres' })
     .trim()
     .refine((value) => !/123|234|345|456|567|678|789/.test(value), {
-      message: 'Does not contain sequential numbers',
+      message: 'Não pode conter números sequenciais',
     }),
 });
 
 export const LoginForm = () => {
+  const searchParams = useSearchParams();
+  const error = searchParams.get('error');
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,15 +43,13 @@ export const LoginForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-
     signIn('credentials', {
       ...values,
       callbackUrl: '/register',
     });
   }
 
-  const { isSubmitting, isValid } = form.formState;
+  const { isSubmitting } = form.formState;
 
   return (
     <div>
@@ -97,7 +96,13 @@ export const LoginForm = () => {
               </FormItem>
             )}
           />
-          <Button disabled={!isValid || isSubmitting} type="submit">
+          {error === 'CredentialsSignin' && (
+            <div className="text-red-600">
+              <p>Error ao validar o usuário.</p>
+              Verifique seu e-mail e senha e tente novamente.
+            </div>
+          )}
+          <Button disabled={isSubmitting} type="submit">
             Submit
           </Button>
         </form>
