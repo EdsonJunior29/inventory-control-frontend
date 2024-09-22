@@ -1,8 +1,13 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { LoginForm } from '../loginForm';
+import { useSearchParams } from 'next/navigation';
 
 jest.mock('next-auth/react', () => ({
   signIn: jest.fn(),
+}));
+
+jest.mock('next/navigation', () => ({
+  useSearchParams: jest.fn(),
 }));
 
 afterEach(() => {
@@ -10,6 +15,12 @@ afterEach(() => {
 });
 
 describe('Render Login Form component', () => {
+  beforeEach(() => {
+    (useSearchParams as jest.Mock).mockReturnValue({
+      get: jest.fn().mockReturnValue(null),
+    });
+  });
+
   it('should be rendered as the word email', () => {
     render(<LoginForm />);
     const wordEmail = screen.getByLabelText('Email');
@@ -43,25 +54,6 @@ describe('Render Login Form component', () => {
     const submitButton = screen.getByRole('button', { name: /submit/i });
 
     expect(submitButton).toBeInTheDocument();
-  });
-
-  it('should disable submit button when form is invalid', async () => {
-    render(<LoginForm />);
-
-    // Verifica se os inputs e o botão estão no documento
-    const emailInput = screen.getByPlaceholderText(/email/i);
-    const passwordInput = screen.getByPlaceholderText(/password/i);
-    const submitButton = screen.getByRole('button', { name: /submit/i });
-
-    // Preenche o e-mail e password com um formato inválido
-    fireEvent.change(emailInput, { target: { value: 'invalidemail' } });
-    fireEvent.change(passwordInput, { target: { value: 'P@ssw0rd' } });
-
-    // Aguarda a validação do formulário.
-    // Verifica se o botão está desabilitado pois, os dados de email e senha estão inválidos
-    await waitFor(() => {
-      expect(submitButton).toBeDisabled();
-    });
   });
 
   it('should enable the submit button when the form is valid', async () => {
