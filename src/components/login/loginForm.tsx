@@ -52,7 +52,7 @@ export const LoginForm = () => {
   const { isSubmitting } = form.formState;
 
   return (
-    <div>
+    <div className="flex justify-center items-center bg-cyan-500 rounded-2xl w-[500px] h-[300px]">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -105,7 +105,7 @@ export const LoginForm = () => {
           <Button
             disabled={isSubmitting}
             type="submit"
-            className="hover:bg-cyan-500"
+            className="hover:bg-orange-900"
           >
             Submit
           </Button>
