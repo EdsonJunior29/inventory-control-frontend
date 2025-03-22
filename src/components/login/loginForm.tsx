@@ -63,7 +63,7 @@ export const LoginForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="text-white">Email</FormLabel>
                 <FormControl>
                   <Input
                     type="email"
@@ -82,7 +82,7 @@ export const LoginForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel className="text-white">Password</FormLabel>
                 <FormControl>
                   <Input
                     type="password"
@@ -102,7 +102,11 @@ export const LoginForm = () => {
               Verifique seu e-mail e senha e tente novamente.
             </div>
           )}
-          <Button disabled={isSubmitting} type="submit">
+          <Button
+            disabled={isSubmitting}
+            type="submit"
+            className="hover:bg-cyan-500"
+          >
             Submit
           </Button>
         </form>
