@@ -6,9 +6,9 @@ import React from 'react';
 export default async function RegisterPage() {
   const session = await getServerSession();
 
-  if (!session) {
-    redirect('/');
-  }
+  //if (!session) {
+  //  redirect('/');
+  //}
 
   return (
     <>
