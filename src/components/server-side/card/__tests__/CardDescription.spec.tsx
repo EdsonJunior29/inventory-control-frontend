@@ -1,10 +1,10 @@
 import React, { createRef } from 'react';
 import { render, screen } from '@testing-library/react';
-import { CardHeader } from '../CardHeader';
+import { CardDescription } from '../CardDescription';
 
-describe('CardHeader', () => {
+describe('CardDescription', () => {
   it('should renders a div element', () => {
-    render(<CardHeader>Test</CardHeader>);
+    render(<CardDescription>Test</CardDescription>);
 
     const element = screen.getByText('Test');
 
@@ -13,18 +13,16 @@ describe('CardHeader', () => {
   });
 
   it('should default className', () => {
-    render(<CardHeader>Test</CardHeader>);
+    render(<CardDescription>Test</CardDescription>);
 
     const element = screen.getByText('Test');
 
-    expect(element).toHaveClass('flex');
-    expect(element).toHaveClass('flex-col');
-    expect(element).toHaveClass('space-y-1.5');
-    expect(element).toHaveClass('p-6');
+    expect(element).toHaveClass('text-sm');
+    expect(element).toHaveClass('text-muted-foreground');
   });
 
   it('should merges additional className passed as props', () => {
-    render(<CardHeader className="custom-class">Test</CardHeader>);
+    render(<CardDescription className="custom-class">Test</CardDescription>);
 
     const element = screen.getByText('Test');
 
@@ -33,9 +31,13 @@ describe('CardHeader', () => {
 
   it('should forwards other HTML props like id or dat-*', () => {
     render(
-      <CardHeader id="test-id" data-testid="test-id" data-custom="custom-data">
+      <CardDescription
+        id="test-id"
+        data-testid="test-id"
+        data-custom="custom-data"
+      >
         Test
-      </CardHeader>
+      </CardDescription>
     );
 
     const element = screen.getByTestId('test-id');
@@ -46,7 +48,7 @@ describe('CardHeader', () => {
 
   it('should forwards ref to the DOM node', () => {
     const ref = createRef<HTMLDivElement>();
-    render(<CardHeader ref={ref}>Test</CardHeader>);
+    render(<CardDescription ref={ref}>Test</CardDescription>);
 
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
     expect(ref.current?.textContent).toBe('Test');
